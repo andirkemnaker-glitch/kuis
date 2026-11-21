@@ -44,10 +44,10 @@
 
       <!-- Switch Role -->
       <div class="flex bg-teal-950/60 p-1 rounded-xl border border-teal-600/40">
-        <button type="button" id="btn-role-mhs" onclick="switchRole('mahasiswa')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-white text-teal-900 shadow transition">
+        <button type="button" id="btn-role-mhs" onclick="window.switchRole('mahasiswa')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-white text-teal-900 shadow transition">
           Mahasiswa
         </button>
-        <button type="button" id="btn-role-dosen" onclick="switchRole('dosen')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-teal-100 hover:text-white transition">
+        <button type="button" id="btn-role-dosen" onclick="window.switchRole('dosen')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-teal-100 hover:text-white transition">
           Dosen
         </button>
       </div>
@@ -76,10 +76,10 @@
           </ul>
         </div>
 
-        <form onsubmit="startQuiz(event)" class="space-y-4">
+        <form onsubmit="window.startQuiz(event)" class="space-y-4">
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-teal-800 mb-1.5">Pilih Materi / Kelas Kuis *</label>
-            <select id="mhs-paket-select" onchange="onSelectPaketMhs()" required class="w-full px-3.5 py-3 rounded-xl border-2 border-teal-200 bg-teal-50/40 font-semibold text-sm text-slate-800 focus:outline-none focus:border-teal-600"></select>
+            <select id="mhs-paket-select" onchange="window.onSelectPaketMhs()" required class="w-full px-3.5 py-3 rounded-xl border-2 border-teal-200 bg-teal-50/40 font-semibold text-sm text-slate-800 focus:outline-none focus:border-teal-600"></select>
           </div>
 
           <div>
@@ -117,7 +117,7 @@
           </div>
         </div>
 
-        <form id="quiz-form" onsubmit="submitQuiz(event)" class="space-y-6">
+        <form id="quiz-form" onsubmit="window.submitQuiz(event)" class="space-y-6">
           <div class="bg-white rounded-2xl border border-teal-100 p-4 sm:p-6 shadow-sm">
             <h3 class="text-base font-extrabold text-teal-900 mb-4 pb-2 border-b border-teal-100">Bagian A: 10 Soal Pilihan Ganda</h3>
             <div id="container-pg" class="space-y-5"></div>
@@ -159,7 +159,7 @@
           <p>Nilai Skala 100: <b id="res-skala100" class="text-slate-900">0</b></p>
         </div>
 
-        <button type="button" onclick="resetStudentView()" class="w-full py-3 rounded-xl border-2 border-teal-700 text-teal-800 font-bold text-sm hover:bg-teal-50 transition">
+        <button type="button" onclick="window.resetStudentView()" class="w-full py-3 rounded-xl border-2 border-teal-700 text-teal-800 font-bold text-sm hover:bg-teal-50 transition">
           Kembali ke Halaman Awal
         </button>
       </div>
@@ -172,7 +172,7 @@
         <div class="w-12 h-12 rounded-2xl bg-teal-900 text-yellow-300 mx-auto mb-3 flex items-center justify-center text-xl font-extrabold">🔒</div>
         <h2 class="text-xl font-extrabold text-slate-900 text-center">Akses Khusus Dosen UNIPI</h2>
         <p class="text-xs text-slate-500 text-center mt-1 mb-5">Kelola bank paket materi, pantau peringkat, dan export Excel.</p>
-        <form onsubmit="loginDosen(event)" class="space-y-4">
+        <form onsubmit="window.loginDosen(event)" class="space-y-4">
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">Password Dosen</label>
             <input type="password" id="dosen-pass-input" required value="dosen123" placeholder="Default: dosen123" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-teal-600" />
@@ -193,10 +193,10 @@
             <p class="text-xs text-slate-500">Kelola paket soal, pantau peringkat tercepat, dan unduh laporan Excel.</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <button type="button" onclick="copyAppLink()" class="px-3.5 py-2 rounded-xl bg-teal-50 text-teal-800 border border-teal-200 text-xs font-bold hover:bg-teal-100 transition">
+            <button type="button" onclick="window.copyAppLink()" class="px-3.5 py-2 rounded-xl bg-teal-50 text-teal-800 border border-teal-200 text-xs font-bold hover:bg-teal-100 transition">
               Salin Link Aplikasi
             </button>
-            <button type="button" onclick="logoutDosen()" class="px-3.5 py-2 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold hover:bg-rose-100 transition">
+            <button type="button" onclick="window.logoutDosen()" class="px-3.5 py-2 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold hover:bg-rose-100 transition">
               Keluar
             </button>
           </div>
@@ -204,13 +204,13 @@
 
         <!-- Tabs -->
         <div class="flex flex-wrap gap-2">
-          <button type="button" id="tab-btn-rank" onclick="switchDosenTab('rank')" class="px-4 py-2 rounded-xl text-xs font-bold bg-teal-800 text-white shadow">
+          <button type="button" id="tab-btn-rank" onclick="window.switchDosenTab('rank')" class="px-4 py-2 rounded-xl text-xs font-bold bg-teal-800 text-white shadow">
             1. Peringkat & Export Excel
           </button>
-          <button type="button" id="tab-btn-soal" onclick="switchDosenTab('soal')" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200">
+          <button type="button" id="tab-btn-soal" onclick="window.switchDosenTab('soal')" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200">
             2. Bank Materi & 20 Soal
           </button>
-          <button type="button" id="tab-btn-cloud" onclick="switchDosenTab('cloud')" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200">
+          <button type="button" id="tab-btn-cloud" onclick="window.switchDosenTab('cloud')" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200">
             3. Cloud Sync (50-100 Mhs) & Password
           </button>
         </div>
@@ -220,13 +220,13 @@
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-2">
               <label class="text-xs font-bold text-slate-700">Filter Materi:</label>
-              <select id="rank-filter-paket" onchange="renderLeaderboard()" class="px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold bg-slate-50"></select>
+              <select id="rank-filter-paket" onchange="window.renderLeaderboard()" class="px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold bg-slate-50"></select>
             </div>
             <div class="flex gap-2">
-              <button type="button" onclick="refreshFromCloud()" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200">
+              <button type="button" onclick="window.refreshFromCloud(true)" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200">
                 Refresh Data
               </button>
-              <button type="button" onclick="exportToExcel()" class="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold shadow hover:bg-emerald-700">
+              <button type="button" onclick="window.exportToExcel()" class="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold shadow hover:bg-emerald-700">
                 Download Excel (.xlsx)
               </button>
             </div>
@@ -268,12 +268,12 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-2 pt-1">
-              <button type="button" onclick="createNewPaket()" class="px-4 py-2.5 rounded-xl unipi-gradient text-white text-xs font-bold shadow">
+              <button type="button" onclick="window.createNewPaket()" class="px-4 py-2.5 rounded-xl unipi-gradient text-white text-xs font-bold shadow">
                 + Tambah Paket Materi Baru
               </button>
               <label class="px-4 py-2.5 rounded-xl bg-amber-500 text-slate-950 text-xs font-bold shadow cursor-pointer hover:bg-amber-400">
                 Upload PPTX / TXT (Auto Ekstrak Teks)
-                <input type="file" id="ppt-upload-input" accept=".pptx,.txt" multiple onchange="handlePPTUpload(event)" class="hidden" />
+                <input type="file" id="ppt-upload-input" accept=".pptx,.txt" multiple onchange="window.handlePPTUpload(event)" class="hidden" />
               </label>
             </div>
             <p id="ppt-status" class="text-xs text-teal-700 font-semibold hidden"></p>
@@ -284,13 +284,13 @@
             <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
               <div class="flex items-center gap-2">
                 <label class="text-xs font-bold text-slate-700">Edit Paket:</label>
-                <select id="editor-paket-select" onchange="loadPaketIntoEditor()" class="px-3 py-2 rounded-xl border border-teal-300 bg-teal-50 text-xs font-bold text-teal-900"></select>
+                <select id="editor-paket-select" onchange="window.loadPaketIntoEditor()" class="px-3 py-2 rounded-xl border border-teal-300 bg-teal-50 text-xs font-bold text-teal-900"></select>
               </div>
               <div class="flex gap-2">
-                <button type="button" onclick="deleteCurrentPaket()" class="px-3 py-2 rounded-xl bg-rose-50 text-rose-700 text-xs font-bold border border-rose-200">
+                <button type="button" onclick="window.deleteCurrentPaket()" class="px-3 py-2 rounded-xl bg-rose-50 text-rose-700 text-xs font-bold border border-rose-200">
                   Hapus Paket
                 </button>
-                <button type="button" onclick="saveEditedQuestions()" class="px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-bold shadow hover:bg-teal-800">
+                <button type="button" onclick="window.saveEditedQuestions()" class="px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-bold shadow hover:bg-teal-800">
                   Simpan & Publikasikan 20 Soal
                 </button>
               </div>
@@ -306,14 +306,14 @@
           <div class="bg-white rounded-2xl border border-teal-100 p-5 shadow-sm space-y-3">
             <h3 class="text-sm font-extrabold text-teal-900">Koneksi Database Bersama (50–100+ Mahasiswa)</h3>
             <p class="text-xs text-slate-600 leading-relaxed">
-              Agar soal yang Anda buat langsung muncul di semua HP mahasiswa (setelah di-deploy ke Vercel) dan nilai 100 mahasiswa terkumpul otomatis, masukkan URL Web App <b>Google Apps Script</b> atau Endpoint REST JSON Anda di bawah ini:
+              Agar soal yang Anda buat langsung muncul di semua HP mahasiswa (setelah di-deploy ke Vercel) dan nilai 100 mahasiswa terkumpul otomatis, masukkan URL Web App <b>Google Apps Script</b> Anda di bawah ini:
             </p>
             <input type="url" id="cloud-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs" />
             <div class="flex gap-2">
-              <button type="button" onclick="saveCloudConfig()" class="px-4 py-2 rounded-xl unipi-gradient text-white text-xs font-bold">
+              <button type="button" onclick="window.saveCloudConfig()" class="px-4 py-2 rounded-xl unipi-gradient text-white text-xs font-bold">
                 Simpan URL Cloud
               </button>
-              <button type="button" onclick="pushAllToCloud()" class="px-3.5 py-2 rounded-xl bg-teal-50 text-teal-800 border border-teal-200 text-xs font-bold">
+              <button type="button" onclick="window.pushAllToCloud(true)" class="px-3.5 py-2 rounded-xl bg-teal-50 text-teal-800 border border-teal-200 text-xs font-bold">
                 Sinkronkan Sekarang
               </button>
             </div>
@@ -324,7 +324,7 @@
             <h3 class="text-sm font-extrabold text-slate-900">Ubah Password Dosen</h3>
             <p class="text-xs text-slate-500">Ganti password default agar mahasiswa tidak dapat mengakses halaman dosen.</p>
             <input type="password" id="new-dosen-pass" placeholder="Password Baru (minimal 5 karakter)" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-xs" />
-            <button type="button" onclick="changeDosenPassword()" class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">
+            <button type="button" onclick="window.changeDosenPassword()" class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">
               Update Password Dosen
             </button>
           </div>
@@ -341,10 +341,10 @@
   <script>
     // ==================== DATA & STATE ====================
     const STORAGE_KEYS = {
-      PAKET: 'unipi_quiz_pakets_v2',
-      RESULTS: 'unipi_quiz_results_v2',
-      PASS: 'unipi_dosen_pass_v2',
-      CLOUD: 'unipi_cloud_url_v2'
+      PAKET: 'unipi_quiz_pakets_v3',
+      RESULTS: 'unipi_quiz_results_v3',
+      PASS: 'unipi_dosen_pass_v3',
+      CLOUD: 'unipi_cloud_url_v3'
     };
 
     const DEFAULT_QUESTIONS = [
@@ -372,9 +372,15 @@
       { type: 'essay', q: 'Perangkat lunak kecil yang memungkinkan sistem operasi berkomunikasi dengan hardware tertentu disebut?', ans: 'Driver|Device Driver' }
     ];
 
+    function safeStorageGet(key) {
+      try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+    function safeStorageSet(key, val) {
+      try { localStorage.setItem(key, val); } catch (e) {}
+    }
     function safeParse(key, fallback) {
       try {
-        const raw = localStorage.getItem(key);
+        const raw = safeStorageGet(key);
         return raw ? JSON.parse(raw) : fallback;
       } catch (e) {
         return fallback;
@@ -392,35 +398,44 @@
     ]);
 
     let results = safeParse(STORAGE_KEYS.RESULTS, []);
-    let dosenPass = localStorage.getItem(STORAGE_KEYS.PASS) || 'dosen123';
-    let cloudUrl = localStorage.getItem(STORAGE_KEYS.CLOUD) || '';
+    let dosenPass = safeStorageGet(STORAGE_KEYS.PASS) || 'dosen123';
+    let cloudUrl = safeStorageGet(STORAGE_KEYS.CLOUD) || '';
 
     let activeQuizPaket = null;
     let timerInterval = null;
     let startTimeMs = 0;
 
-    // ==================== INIT ====================
-    window.addEventListener('DOMContentLoaded', async () => {
+    // ==================== ROLE SWITCHING (DEFINED EARLY) ====================
+    window.switchRole = function(role) {
       try {
-        const cloudInput = document.getElementById('cloud-url-input');
-        if (cloudInput) cloudInput.value = cloudUrl;
-        updateCloudBadge();
-        syncAllDropdowns();
-        if (cloudUrl) await refreshFromCloud();
-      } catch (e) {
-        console.warn('Init error:', e);
-      }
-    });
+        const vMhs = document.getElementById('view-mahasiswa');
+        const vDosen = document.getElementById('view-dosen');
+        const bMhs = document.getElementById('btn-role-mhs');
+        const bDosen = document.getElementById('btn-role-dosen');
 
-    function saveLocal() {
-      try {
-        localStorage.setItem(STORAGE_KEYS.PAKET, JSON.stringify(pakets));
-        localStorage.setItem(STORAGE_KEYS.RESULTS, JSON.stringify(results));
-      } catch (e) {
-        console.warn('Storage save error:', e);
+        if (!vMhs || !vDosen || !bMhs || !bDosen) return;
+
+        if (role === 'mahasiswa') {
+          vMhs.classList.remove('hidden');
+          vDosen.classList.add('hidden');
+          bMhs.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-white text-teal-900 shadow transition';
+          bDosen.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-teal-100 hover:text-white transition';
+          window.syncAllDropdowns();
+        } else {
+          vMhs.classList.add('hidden');
+          vDosen.classList.remove('hidden');
+          bDosen.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-white text-teal-900 shadow transition';
+          bMhs.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-teal-100 hover:text-white transition';
+          const loginBox = document.getElementById('dosen-login-box');
+          const dashBox = document.getElementById('dosen-dashboard');
+          if (loginBox && dashBox && dashBox.classList.contains('hidden')) {
+            loginBox.classList.remove('hidden');
+          }
+        }
+      } catch (err) {
+        console.warn('switchRole error:', err);
       }
-      syncAllDropdowns();
-    }
+    };
 
     function updateCloudBadge() {
       const badge = document.getElementById('cloud-badge');
@@ -434,7 +449,13 @@
       }
     }
 
-    function syncAllDropdowns() {
+    function saveLocal() {
+      safeStorageSet(STORAGE_KEYS.PAKET, JSON.stringify(pakets));
+      safeStorageSet(STORAGE_KEYS.RESULTS, JSON.stringify(results));
+      window.syncAllDropdowns();
+    }
+
+    window.syncAllDropdowns = function() {
       const mhsSelect = document.getElementById('mhs-paket-select');
       const editorSelect = document.getElementById('editor-paket-select');
       const rankSelect = document.getElementById('rank-filter-paket');
@@ -459,45 +480,22 @@
       if (prevEditor && pakets.some(p => p.id === prevEditor)) editorSelect.value = prevEditor;
       if (prevRank && (prevRank === 'ALL' || pakets.some(p => p.id === prevRank))) rankSelect.value = prevRank;
 
-      onSelectPaketMhs();
-      loadPaketIntoEditor();
-      renderLeaderboard();
-    }
-
-    // ==================== ROLE SWITCHING ====================
-    function switchRole(role) {
-      const vMhs = document.getElementById('view-mahasiswa');
-      const vDosen = document.getElementById('view-dosen');
-      const bMhs = document.getElementById('btn-role-mhs');
-      const bDosen = document.getElementById('btn-role-dosen');
-
-      if (!vMhs || !vDosen || !bMhs || !bDosen) return;
-
-      if (role === 'mahasiswa') {
-        vMhs.classList.remove('hidden');
-        vDosen.classList.add('hidden');
-        bMhs.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-white text-teal-900 shadow transition';
-        bDosen.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-teal-100 hover:text-white transition';
-        syncAllDropdowns();
-      } else {
-        vMhs.classList.add('hidden');
-        vDosen.classList.remove('hidden');
-        bDosen.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-white text-teal-900 shadow transition';
-        bMhs.className = 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-teal-100 hover:text-white transition';
-      }
-    }
+      window.onSelectPaketMhs();
+      window.loadPaketIntoEditor();
+      window.renderLeaderboard();
+    };
 
     // ==================== MAHASISWA FLOW ====================
-    function onSelectPaketMhs() {
+    window.onSelectPaketMhs = function() {
       const id = document.getElementById('mhs-paket-select')?.value;
       const p = pakets.find(item => item.id === id);
       const matkulEl = document.getElementById('mhs-matkul');
       if (p && matkulEl) {
         matkulEl.value = p.matkul;
       }
-    }
+    };
 
-    function startQuiz(e) {
+    window.startQuiz = function(e) {
       e.preventDefault();
       const paketId = document.getElementById('mhs-paket-select').value;
       const nama = document.getElementById('mhs-nama').value.trim();
@@ -520,7 +518,7 @@
         const diffSec = Math.floor((Date.now() - startTimeMs) / 1000);
         document.getElementById('quiz-timer').textContent = formatSeconds(diffSec);
       }, 1000);
-    }
+    };
 
     function renderQuizQuestions(questions) {
       const cPg = document.getElementById('container-pg');
@@ -533,7 +531,7 @@
           const letters = ['A', 'B', 'C', 'D'];
           const optsHtml = (item.options || ['', '', '', '']).map((opt, oIdx) => `
             <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-teal-500 hover:bg-teal-50/40 cursor-pointer transition">
-              <input type="radio" name="q_${idx}" value="${letters[oIdx]}" onchange="updateAnsweredCount()" class="w-4 h-4 text-teal-700 focus:ring-teal-600" />
+              <input type="radio" name="q_${idx}" value="${letters[oIdx]}" onchange="window.updateAnsweredCount()" class="w-4 h-4 text-teal-700 focus:ring-teal-600" />
               <span class="text-xs sm:text-sm font-medium text-slate-800"><b>${letters[oIdx]}.</b> ${escapeHtml(opt)}</span>
             </label>
           `).join('');
@@ -548,15 +546,15 @@
           cEssay.innerHTML += `
             <div class="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 space-y-2">
               <label class="block text-xs sm:text-sm font-bold text-slate-900">${idx + 1}. ${escapeHtml(item.q)}</label>
-              <input type="text" name="q_${idx}" oninput="updateAnsweredCount()" placeholder="Ketik jawaban singkat Anda..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm focus:outline-none focus:border-teal-600" />
+              <input type="text" name="q_${idx}" oninput="window.updateAnsweredCount()" placeholder="Ketik jawaban singkat Anda..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm focus:outline-none focus:border-teal-600" />
             </div>
           `;
         }
       });
-      updateAnsweredCount();
+      window.updateAnsweredCount();
     }
 
-    function updateAnsweredCount() {
+    window.updateAnsweredCount = function() {
       if (!activeQuizPaket) return;
       let count = 0;
       activeQuizPaket.questions.forEach((item, idx) => {
@@ -568,9 +566,9 @@
         }
       });
       document.getElementById('quiz-progress-badge').textContent = `${count}/${activeQuizPaket.questions.length} Terjawab`;
-    }
+    };
 
-    async function submitQuiz(e) {
+    window.submitQuiz = async function(e) {
       e.preventDefault();
       clearInterval(timerInterval);
       const durationSec = Math.max(1, Math.floor((Date.now() - startTimeMs) / 1000));
@@ -641,35 +639,35 @@
       document.getElementById('res-pg').textContent = record.benarPg;
       document.getElementById('res-essay').textContent = record.benarEssay;
       document.getElementById('res-skala100').textContent = record.skala100;
-    }
+    };
 
-    function resetStudentView() {
+    window.resetStudentView = function() {
       document.getElementById('mhs-result-area').classList.add('hidden');
       document.getElementById('mhs-intro-card').classList.remove('hidden');
       document.getElementById('mhs-nama').value = '';
       document.getElementById('mhs-npm').value = '';
-    }
+    };
 
     // ==================== DOSEN FLOW ====================
-    function loginDosen(e) {
+    window.loginDosen = function(e) {
       if (e) e.preventDefault();
       const inputEl = document.getElementById('dosen-pass-input');
       const val = (inputEl ? inputEl.value : '').trim();
       if (val === dosenPass) {
         document.getElementById('dosen-login-box').classList.add('hidden');
         document.getElementById('dosen-dashboard').classList.remove('hidden');
-        syncAllDropdowns();
+        window.syncAllDropdowns();
       } else {
         alert('Password Dosen salah! Default awal: dosen123');
       }
-    }
+    };
 
-    function logoutDosen() {
+    window.logoutDosen = function() {
       document.getElementById('dosen-dashboard').classList.add('hidden');
       document.getElementById('dosen-login-box').classList.remove('hidden');
-    }
+    };
 
-    function switchDosenTab(tab) {
+    window.switchDosenTab = function(tab) {
       ['rank', 'soal', 'cloud'].forEach(t => {
         const panel = document.getElementById(`dosen-tab-${t}`);
         if (panel) panel.classList.toggle('hidden', t !== tab);
@@ -680,9 +678,9 @@
             : 'px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200';
         }
       });
-    }
+    };
 
-    function createNewPaket() {
+    window.createNewPaket = function() {
       const title = document.getElementById('new-paket-title').value.trim();
       const matkul = document.getElementById('new-paket-matkul').value.trim();
       if (!title || !matkul) return alert('Isi Judul Paket Materi dan Nama Mata Kuliah terlebih dahulu.');
@@ -699,16 +697,16 @@
       saveLocal();
       document.getElementById('editor-paket-select').value = newP.id;
       document.getElementById('mhs-paket-select').value = newP.id;
-      onSelectPaketMhs();
-      loadPaketIntoEditor();
-      pushAllToCloud();
+      window.onSelectPaketMhs();
+      window.loadPaketIntoEditor();
+      window.pushAllToCloud(false);
 
       document.getElementById('new-paket-title').value = '';
       document.getElementById('new-paket-matkul').value = '';
       alert('Paket materi & mata kuliah baru berhasil ditambahkan!');
-    }
+    };
 
-    async function handlePPTUpload(event) {
+    window.handlePPTUpload = async function(event) {
       const files = Array.from(event.target.files);
       if (!files.length) return;
 
@@ -754,14 +752,14 @@
       pakets.unshift(newP);
       saveLocal();
       document.getElementById('editor-paket-select').value = newP.id;
-      loadPaketIntoEditor();
-      pushAllToCloud();
+      window.loadPaketIntoEditor();
+      window.pushAllToCloud(false);
 
       statusEl.textContent = `Berhasil membuat paket "${title}" dari ${files.length} file! Silakan cek/sesuaikan kunci jawaban di editor bawah.`;
       event.target.value = '';
-    }
+    };
 
-    function loadPaketIntoEditor() {
+    window.loadPaketIntoEditor = function() {
       const id = document.getElementById('editor-paket-select')?.value;
       const p = pakets.find(item => item.id === id);
       const container = document.getElementById('editor-questions-list');
@@ -799,9 +797,9 @@
           `;
         }
       }).join('');
-    }
+    };
 
-    function saveEditedQuestions() {
+    window.saveEditedQuestions = function() {
       const id = document.getElementById('editor-paket-select').value;
       const p = pakets.find(item => item.id === id);
       if (!p) return;
@@ -815,21 +813,21 @@
       });
       p.updatedAt = Date.now();
       saveLocal();
-      pushAllToCloud();
+      window.pushAllToCloud(false);
       alert('20 Soal & Kunci Jawaban berhasil disimpan!');
-    }
+    };
 
-    function deleteCurrentPaket() {
+    window.deleteCurrentPaket = function() {
       if (pakets.length <= 1) return alert('Minimal harus tersisa 1 paket materi.');
       if (!confirm('Hapus paket materi ini?')) return;
       const id = document.getElementById('editor-paket-select').value;
       pakets = pakets.filter(p => p.id !== id);
       saveLocal();
-      pushAllToCloud();
-    }
+      window.pushAllToCloud(false);
+    };
 
     // ==================== LEADERBOARD & EXCEL ====================
-    function renderLeaderboard() {
+    window.renderLeaderboard = function() {
       const filterId = document.getElementById('rank-filter-paket')?.value || 'ALL';
       const tbody = document.getElementById('leaderboard-body');
       if (!tbody) return;
@@ -860,20 +858,20 @@
             <td class="p-3 text-center font-extrabold text-teal-800">${r.totalPoin.toLocaleString('id-ID')}</td>
             <td class="p-3 text-center font-mono text-xs">${r.durationText}</td>
             <td class="p-3 text-center">
-              <button type="button" onclick="deleteResult('${r.id}')" class="text-rose-600 hover:underline text-xs font-bold">Hapus</button>
+              <button type="button" onclick="window.deleteResult('${r.id}')" class="text-rose-600 hover:underline text-xs font-bold">Hapus</button>
             </td>
           </tr>
         `;
       }).join('');
-    }
+    };
 
-    function deleteResult(id) {
+    window.deleteResult = function(id) {
       if (!confirm('Hapus data nilai mahasiswa ini?')) return;
       results = results.filter(r => r.id !== id);
       saveLocal();
-    }
+    };
 
-    function exportToExcel() {
+    window.exportToExcel = function() {
       const filterId = document.getElementById('rank-filter-paket').value;
       const filtered = results
         .filter(r => filterId === 'ALL' || r.paketId === filterId)
@@ -900,18 +898,21 @@
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Peringkat_Kuis_UNIPI');
       XLSX.writeFile(wb, `Rekap_Nilai_Kuis_UNIPI_${new Date().toISOString().slice(0,10)}.xlsx`);
-    }
+    };
 
     // ==================== CLOUD & PASSWORD ====================
-    function saveCloudConfig() {
+    window.saveCloudConfig = function() {
       cloudUrl = document.getElementById('cloud-url-input').value.trim();
-      localStorage.setItem(STORAGE_KEYS.CLOUD, cloudUrl);
+      safeStorageSet(STORAGE_KEYS.CLOUD, cloudUrl);
       updateCloudBadge();
       alert('Konfigurasi Cloud disimpan!');
-    }
+    };
 
-    async function pushAllToCloud() {
-      if (!cloudUrl) return;
+    window.pushAllToCloud = async function(showFeedback) {
+      if (!cloudUrl) {
+        if (showFeedback) alert('Masukkan URL Web App Google Apps Script terlebih dahulu.');
+        return;
+      }
       try {
         await fetch(cloudUrl, {
           method: 'POST',
@@ -919,39 +920,47 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'sync_pakets', pakets })
         });
+        if (showFeedback) alert('Sinkronisasi paket soal ke Cloud telah dikirim!');
       } catch (e) {
         console.warn(e);
+        if (showFeedback) alert('Gagal mengirim sinkronisasi ke Cloud. Periksa URL Anda.');
       }
-    }
+    };
 
-    async function refreshFromCloud() {
-      if (!cloudUrl) return renderLeaderboard();
+    window.refreshFromCloud = async function(showFeedback) {
+      if (!cloudUrl) {
+        window.renderLeaderboard();
+        if (showFeedback) alert('Mode Lokal aktif (belum ada URL Cloud).');
+        return;
+      }
       try {
         const res = await fetch(cloudUrl);
         const data = await res.json();
         if (Array.isArray(data.pakets) && data.pakets.length) pakets = data.pakets;
         if (Array.isArray(data.results)) results = data.results;
         saveLocal();
+        if (showFeedback) alert('Data terbaru berhasil diperbarui dari Cloud!');
       } catch (e) {
         console.warn('Gagal mengambil data cloud:', e);
+        if (showFeedback) alert('Gagal mengambil data dari Cloud. Pastikan akses Web App Apps Script diatur ke Siapa saja (Anyone).');
       }
-    }
+    };
 
-    function changeDosenPassword() {
+    window.changeDosenPassword = function() {
       const np = document.getElementById('new-dosen-pass').value.trim();
       if (np.length < 5) return alert('Password baru minimal 5 karakter.');
       dosenPass = np;
-      localStorage.setItem(STORAGE_KEYS.PASS, dosenPass);
+      safeStorageSet(STORAGE_KEYS.PASS, dosenPass);
       document.getElementById('new-dosen-pass').value = '';
       alert('Password dosen berhasil diubah!');
-    }
+    };
 
-    function copyAppLink() {
+    window.copyAppLink = function() {
       const url = window.location.href;
       navigator.clipboard?.writeText(url);
       alert('Link aplikasi berhasil disalin:
 ' + url);
-    }
+    };
 
     // ==================== HELPERS ====================
     function formatSeconds(sec) {
@@ -967,6 +976,19 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;');
     }
+
+    // ==================== INIT ====================
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const cloudInput = document.getElementById('cloud-url-input');
+        if (cloudInput) cloudInput.value = cloudUrl;
+        updateCloudBadge();
+        window.syncAllDropdowns();
+        if (cloudUrl) await window.refreshFromCloud(false);
+      } catch (e) {
+        console.warn('Init error:', e);
+      }
+    });
   </script>
 </body>
 </html>
