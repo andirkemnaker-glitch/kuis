@@ -718,8 +718,7 @@
       for (const file of files) {
         if (file.name.endsWith('.txt')) {
           const txt = await file.text();
-          extractedSentences.push(...txt.split(/[.!?
-]+/).map(s => s.trim()).filter(s => s.length > 25));
+          extractedSentences.push(...txt.split(/[.!?\n]+/).map(s => s.trim()).filter(s => s.length > 25));
         } else if (file.name.endsWith('.pptx')) {
           const zip = await JSZip.loadAsync(file);
           const slideFiles = Object.keys(zip.files).filter(name => name.startsWith('ppt/slides/slide') && name.endsWith('.xml'));
@@ -727,8 +726,7 @@
             const xml = await zip.files[sName].async('text');
             const matches = xml.match(/<a:t[^>]*>([^<]+)<\/a:t>/g) || [];
             const slideText = matches.map(m => m.replace(/<[^>]+>/g, '')).join(' ');
-            extractedSentences.push(...slideText.split(/[.!?
-]+/).map(s => s.trim()).filter(s => s.length > 25));
+            extractedSentences.push(...slideText.split(/[.!?\n]+/).map(s => s.trim()).filter(s => s.length > 25));
           }
         }
       }
