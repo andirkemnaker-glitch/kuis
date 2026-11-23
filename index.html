@@ -59,7 +59,7 @@
       </div>
       <div id="uts-student-intro" class="hidden max-w-xl mx-auto bg-white rounded-2xl shadow border border-teal-100 p-6 space-y-4">
         <h2 class="text-xl font-extrabold text-teal-900">UTS / UAS / Tugas Esai</h2>
-        <p class="text-sm text-slate-600">UTS/UAS terdiri dari 5 soal (a dan b); Tugas terdiri dari 5 soal esai tanpa subbagian. Jawaban dinilai oleh dosen.</p>
+        <p class="text-sm text-slate-600">Jumlah soal dan bagian a/b mengikuti paket yang disiapkan dosen. Jawaban dinilai dan divalidasi dosen.</p>
         <div class="bg-amber-50 border border-amber-200 p-3 rounded-lg text-xs text-amber-900">MODE SIMULASI LOKAL: jawaban hanya tersimpan di browser perangkat ini. Jangan gunakan untuk ujian lintas perangkat sebelum backend ujian disiapkan.</div>
         <form onsubmit="window.startUts(event)" class="space-y-3">
           <label class="block text-xs font-bold">Paket UTS / UAS / Tugas</label>
@@ -95,8 +95,8 @@
         <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 mb-5 text-xs text-amber-900 space-y-1">
           <p class="font-bold">Petunjuk Pengerjaan:</p>
           <ul class="list-disc pl-4 space-y-0.5">
-            <li>Total <b>20 Soal</b> (10 Pilihan Ganda + 10 Jawaban Singkat).</li>
-            <li>Rumus Poin: <b>(Jumlah Benar × 20 × 100) / 2</b>.</li>
+            <li>Jumlah soal mengikuti paket yang dipilih dosen (pilihan ganda dan/atau isian singkat).</li>
+            <li>Nilai otomatis skala 0–100 dihitung dari jumlah benar dibagi jumlah soal yang digunakan.</li>
             <li>Waktu pengerjaan dihitung otomatis dari klik <b>Mulai Kuis</b> hingga <b>Submit</b>.</li>
           </ul>
         </div>
@@ -137,19 +137,19 @@
             <p id="quiz-header-student" class="text-[11px] text-slate-500">Nama • NPM</p>
           </div>
           <div class="flex items-center gap-3">
-            <span id="quiz-progress-badge" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-teal-50 text-teal-800 border border-teal-200">0/20 Terjawab</span>
+            <span id="quiz-progress-badge" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-teal-50 text-teal-800 border border-teal-200">0 Soal Terjawab</span>
             <div class="px-3 py-1 rounded-xl bg-slate-900 text-yellow-300 font-mono font-bold text-sm" id="quiz-timer">00:00</div>
           </div>
         </div>
 
         <form id="quiz-form" onsubmit="window.submitQuiz(event)" class="space-y-6">
           <div class="bg-white rounded-2xl border border-teal-100 p-4 sm:p-6 shadow-sm">
-            <h3 class="text-base font-extrabold text-teal-900 mb-4 pb-2 border-b border-teal-100">Bagian A: 10 Soal Pilihan Ganda</h3>
+            <h3 class="text-base font-extrabold text-teal-900 mb-4 pb-2 border-b border-teal-100">Bagian A: Pilihan Ganda</h3>
             <div id="container-pg" class="space-y-5"></div>
           </div>
 
           <div class="bg-white rounded-2xl border border-teal-100 p-4 sm:p-6 shadow-sm">
-            <h3 class="text-base font-extrabold text-teal-900 mb-4 pb-2 border-b border-teal-100">Bagian B: 10 Soal Jawaban Singkat</h3>
+            <h3 class="text-base font-extrabold text-teal-900 mb-4 pb-2 border-b border-teal-100">Bagian B: Jawaban Singkat</h3>
             <div id="container-essay" class="space-y-4"></div>
           </div>
 
@@ -180,7 +180,7 @@
         </div>
 
         <div class="text-xs text-slate-600 bg-slate-50 rounded-xl p-3.5 space-y-1">
-          <p>Jawaban Benar: <b id="res-benar" class="text-teal-800">0 / 20 Soal</b> (PG: <span id="res-pg">0</span>, Isian: <span id="res-essay">0</span>)</p>
+          <p>Jawaban Benar: <b id="res-benar" class="text-teal-800">0 Soal</b> (PG: <span id="res-pg">0</span>, Isian: <span id="res-essay">0</span>)</p>
           <p>Nilai Skala 100: <b id="res-skala100" class="text-slate-900">0</b></p>
         </div>
 
@@ -201,7 +201,7 @@
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">Password Dosen</label>
             <input type="password" id="dosen-pass-input" required value="dosen123" placeholder="Default: dosen123" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-teal-600" />
-            <p class="text-[11px] text-slate-400 mt-1">Password awal default: <b></b> (dapat diubah di menu pengaturan dosen).</p>
+            <p class="text-[11px] text-slate-400 mt-1">Password awal default: <b>dosen123</b> (dapat diubah di menu pengaturan dosen).</p>
           </div>
           <button type="submit" class="w-full py-3 rounded-xl unipi-gradient text-white font-bold text-sm shadow hover:opacity-95 transition">
             Masuk ke Dashboard Dosen
@@ -233,7 +233,7 @@
             1. Peringkat & Export Excel
           </button>
           <button type="button" id="tab-btn-soal" onclick="window.switchDosenTab('soal')" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200">
-            2. Bank Materi & 20 Soal
+            2. Bank Materi & Soal Dinamis
           </button>
           <button type="button" id="tab-btn-cloud" onclick="window.switchDosenTab('cloud')" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200">
             3. Cloud Sync (50-100 Mhs) & Password
@@ -242,7 +242,7 @@
         </div>
 
         <div id="dosen-tab-uts" class="hidden bg-white border border-teal-100 rounded-2xl shadow-sm p-5 sm:p-6 space-y-5">
-          <h3 class="text-lg font-extrabold text-teal-900">Manajemen UTS / UAS / Tugas — 5 Soal Esai</h3>
+          <h3 class="text-lg font-extrabold text-teal-900">Manajemen UTS / UAS / Tugas — Soal Dinamis</h3>
           <p class="text-xs text-amber-800 bg-amber-50 border border-amber-200 p-3 rounded-lg">SIMULASI LOKAL: data paket, jawaban, dan nilai disimpan di browser ini, bukan Google Sheets. Hindari ujian sungguhan sampai backend aman tersedia.</p>
           <form onsubmit="window.createUtsPackage(event)" class="grid md:grid-cols-2 gap-3 bg-teal-50 rounded-xl p-4">
             <div><label class="text-xs font-bold">Judul paket UTS / UAS / Tugas</label><input id="uts-new-title" required class="w-full p-2 border rounded-lg" placeholder="UTS Pertemuan 1–7"></div>
@@ -257,16 +257,21 @@
           </div>
           <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 space-y-2">
             <h4 class="text-sm font-extrabold text-amber-900">Buat draf UTS / UAS / Tugas dari PPT</h4>
-            <p class="text-xs text-amber-950">Pilih paket di atas, lalu unggah beberapa PPTX/TXT sekaligus. Judul paket dan mata kuliah tidak berubah. Isi PPT digunakan untuk mengusulkan 5 soal esai (UTS/UAS: a dan b; Tugas: tanpa a/b). Draf wajib diperiksa dan diedit sebelum publikasi.</p>
+            <p class="text-xs text-amber-950">Pilih paket di atas, lalu unggah beberapa PPTX/TXT sekaligus. Judul paket dan mata kuliah tidak berubah. Isi PPT digunakan untuk mengusulkan soal esai sesuai jumlah yang dipilih (UTS/UAS: a dan b opsional; Tugas: tanpa a/b). Draf wajib diperiksa dan diedit sebelum publikasi.</p>
             <label class="inline-flex px-4 py-2.5 bg-amber-500 rounded-lg text-xs font-bold text-slate-950 cursor-pointer">Upload PPTX / TXT (bisa banyak file)
               <input type="file" id="uts-ppt-upload" accept=".pptx,.txt" multiple class="hidden" onchange="window.uploadUtsPPT(event)" />
             </label>
             <p id="uts-ppt-status" role="status" aria-live="polite" class="text-xs font-medium text-amber-900"></p>
           </div>
-          <div id="uts-editor" class="space-y-4"></div>
-          <div class="flex flex-wrap gap-2"><button type="button" onclick="window.saveUtsQuestions()" class="p-3 rounded-lg bg-teal-800 text-white text-sm font-bold">Simpan & Publikasikan 5 Soal</button><button type="button" onclick="window.exportUtsGrades()" class="p-3 rounded-lg border border-teal-300 text-teal-800 text-sm font-bold">Ekspor Nilai Excel</button></div>
+          <div class="flex flex-wrap items-end gap-3 rounded-xl bg-teal-50 p-3"><label class="text-sm font-bold">Jumlah soal esai <input id="uts-count" type="number" min="1" max="30" value="5" class="block w-24 p-2 border rounded-lg"/></label><button type="button" onclick="window.resizeUtsQuestions()" class="p-2.5 bg-teal-800 text-white rounded-lg font-semibold text-xs">Terapkan Jumlah Soal</button><p class="text-xs text-slate-600">Bagian b dapat dimatikan per soal. Bobot seluruh subsoal aktif harus berjumlah 100.</p></div><div id="uts-editor" class="space-y-4"></div>
+          <div class="flex flex-wrap gap-2"><button type="button" onclick="window.saveUtsQuestions()" class="p-3 rounded-lg bg-teal-800 text-white text-sm font-bold">Simpan & Publikasikan Soal</button><button type="button" onclick="window.exportUtsGrades()" class="p-3 rounded-lg border border-teal-300 text-teal-800 text-sm font-bold">Ekspor Nilai Excel</button></div>
           <hr>
-          <h3 class="text-lg font-extrabold text-teal-900">Koreksi Jawaban Mahasiswa</h3>
+          <h3 class="text-lg font-extrabold text-teal-900">Peringkat UTS / UAS / Tugas</h3>
+          <p class="text-xs text-slate-600">Peringkat hanya menghitung nilai yang sudah disetujui dosen. Nilai sama memperoleh peringkat sama; mahasiswa yang belum dinilai ditampilkan terpisah.</p>
+          <div id="uts-rank" class="overflow-x-auto"></div>
+          <hr>
+          <h3 class="text-lg font-extrabold text-teal-900">5. Penilaian & Validasi Dosen</h3>
+          <p class="text-xs bg-amber-50 border border-amber-200 text-amber-900 rounded-lg p-3">Rekomendasi nilai di versi ini dihitung dengan pencocokan indikator rubrik (bukan AI generatif). Rekomendasi dapat keliru, terutama pada parafrasa. Dosen wajib membaca jawaban, meninjau catatan, dan menyetujui nilai final. Penilaian AI sungguhan memerlukan backend aman dan belum diaktifkan.</p>
           <div id="uts-grading" class="space-y-4"></div>
         </div>
 
@@ -328,10 +333,10 @@
               </button>
 
             </div>
-            <p class="text-xs text-slate-500">Buat paket beserta mata kuliahnya lebih dahulu. Setelah itu pilih paket di editor dan unggah bahan presentasi untuk menyusun draf 20 soal.</p>
+            <p class="text-xs text-slate-500">Buat paket beserta mata kuliahnya lebih dahulu. Setelah itu pilih paket di editor dan unggah bahan presentasi untuk menyusun draf soal sesuai jumlah pilihan ganda dan isian yang ditentukan.</p>
           </div>
 
-          <!-- Editor 20 Soal -->
+          <!-- Editor Soal Dinamis -->
           <div class="bg-white rounded-2xl border border-teal-100 p-4 sm:p-6 shadow-sm space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
               <div class="flex items-center gap-2">
@@ -348,13 +353,13 @@
                   Hapus Paket
                 </button>
                 <button type="button" onclick="window.saveEditedQuestions()" class="px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-bold shadow hover:bg-teal-800">
-                  Simpan & Publikasikan 20 Soal
+                  Simpan & Publikasikan Soal
                 </button>
               </div>
             </div>
 
             <p id="ppt-status" class="text-xs text-amber-800 font-semibold hidden" role="status"></p>
-            <div id="editor-questions-list" class="space-y-4 max-h-[600px] overflow-y-auto pr-1"></div>
+            <div class="flex flex-wrap gap-3 items-end rounded-xl bg-teal-50 p-3"><label class="text-xs font-bold">Jumlah Pilihan Ganda<input id="quiz-count-pg" type="number" min="0" max="50" class="block w-24 p-2 border rounded-lg"/></label><label class="text-xs font-bold">Jumlah Isian Singkat<input id="quiz-count-essay" type="number" min="0" max="50" class="block w-24 p-2 border rounded-lg"/></label><button type="button" onclick="window.resizeQuizQuestions()" class="px-3 py-2.5 bg-teal-800 text-white text-xs font-bold rounded-lg">Terapkan Jumlah Soal</button><p class="text-xs text-slate-600">Total 1–50 soal. Soal boleh dicampur atau hanya satu jenis.</p></div><div id="editor-questions-list" class="space-y-4 max-h-[600px] overflow-y-auto pr-1"></div>
           </div>
         </div>
 
@@ -583,6 +588,13 @@
       document.getElementById('quiz-header-title').textContent = `${activeQuizPaket.title} (${matkul})`;
       document.getElementById('quiz-header-student').textContent = `${nama} • NPM: ${npm}`;
 
+      if(!activeQuizPaket.questions?.length)return alert('Paket belum memiliki soal.');
+      const pgTotal=activeQuizPaket.questions.filter(q=>q.type==='pg').length;
+      const essayTotal=activeQuizPaket.questions.length-pgTotal;
+      document.querySelector('#container-pg').parentElement.classList.toggle('hidden',!pgTotal);
+      document.querySelector('#container-essay').parentElement.classList.toggle('hidden',!essayTotal);
+      document.querySelector('#container-pg').previousElementSibling.textContent=`Bagian A: ${pgTotal} Soal Pilihan Ganda`;
+      document.querySelector('#container-essay').previousElementSibling.textContent=`Bagian B: ${essayTotal} Soal Jawaban Singkat`;
       renderQuizQuestions(activeQuizPaket.questions);
 
       startTimeMs = Date.now();
@@ -666,8 +678,9 @@
       });
 
       const totalBenar = benarPg + benarEssay;
-      const totalPoin = (totalBenar * 20 * 100) / 2;
-      const skala100 = Math.round((totalBenar / activeQuizPaket.questions.length) * 100);
+      const totalSoal=activeQuizPaket.questions.length;
+      const totalPoin=totalSoal ? Math.round(totalBenar/totalSoal*10000)/100 : 0;
+      const skala100 = Math.round(totalPoin);
 
       const record = {
         id: 'res-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
@@ -679,6 +692,7 @@
         benarPg,
         benarEssay,
         totalBenar,
+        totalSoal,
         totalPoin,
         skala100,
         durationSec,
@@ -731,7 +745,7 @@
         document.getElementById('dosen-dashboard').classList.remove('hidden');
         window.syncAllDropdowns();
       } else {
-        alert('Password Dosen salah! Cek Default');
+        alert('Password Dosen salah! Default awal: dosen123');
       }
     };
 
@@ -854,7 +868,11 @@
         event.target.value = '';
         return;
       }
-      if (!confirm(`Buat draf 20 soal dari ${files.length} file untuk paket "${selectedPaket.title}" (${selectedPaket.matkul})? Judul dan mata kuliah tidak akan diubah. Soal lama belum diganti sampai Anda menyimpan hasil edit.`)) {
+      const requestedPG=Number(document.getElementById('quiz-count-pg').value);
+      const requestedEssay=Number(document.getElementById('quiz-count-essay').value);
+      if(!Number.isInteger(requestedPG)||!Number.isInteger(requestedEssay)||requestedPG<0||requestedEssay<0||requestedPG+requestedEssay<1||requestedPG+requestedEssay>50){statusEl.textContent='Atur jumlah soal 1–50 dahulu.';event.target.value='';return;}
+      if(results.some(r=>r.paketId===selectedId)){statusEl.textContent='Paket sudah memiliki hasil mahasiswa. Buat paket baru sebelum membuat soal yang berbeda.';event.target.value='';return;}
+      if (!confirm(`Buat draf ${requestedPG+requestedEssay} soal (${requestedPG} PG, ${requestedEssay} isian) dari ${files.length} file untuk paket "${selectedPaket.title}" (${selectedPaket.matkul})? Draf belum mengganti soal lama sampai disimpan.`)) {
         event.target.value = '';
         return;
       }
@@ -873,10 +891,15 @@
             for (const name of slideFiles) slides.push(getSlideLines(await zip.files[name].async('text')));
           } else { throw new Error(`File ${file.name} tidak didukung. Gunakan .pptx atau .txt.`); }
         }
-        const draft = buildQuestionDraft(slides);
+        // Generator asal menghasilkan 10 PG + 10 isian. Ambil sebanyak yang diminta;
+        // untuk jumlah lebih besar, perluas draf dan wajib ditinjau dosen.
+        const draftBase=buildQuestionDraft(slides);
+        const pgBase=draftBase.filter(q=>q.type==='pg');
+        const shortBase=draftBase.filter(q=>q.type!=='pg');
+        const draft=[...Array.from({length:requestedPG},(_,i)=>pgBase[i%pgBase.length]?{...pgBase[i%pgBase.length],options:[...pgBase[i%pgBase.length].options],q:i>=pgBase.length?'[PERLU EDIT] '+pgBase[i%pgBase.length].q:pgBase[i%pgBase.length].q}:{type:'pg',q:'',options:['','','',''],ans:'A'}),...Array.from({length:requestedEssay},(_,i)=>shortBase[i%shortBase.length]?{...shortBase[i%shortBase.length],q:i>=shortBase.length?'[PERLU EDIT] '+shortBase[i%shortBase.length].q:shortBase[i%shortBase.length].q}:{type:'essay',q:'',ans:''})];
         uploadDraft = {paketId:selectedId, questions:draft};
         window.loadPaketIntoEditor();
-        statusEl.textContent = `Draf 20 soal dibuat untuk "${selectedPaket.title}" (${selectedPaket.matkul}) dari ${slides.length} slide/bagian. Periksa dan perbaiki pertanyaan, opsi, serta SEMUA kunci jawaban, terutama teks "PERLU EDIT". Belum dipublikasikan. Klik "Simpan & Publikasikan 20 Soal" jika sudah benar.`;
+        statusEl.textContent = `Draf ${draft.length} soal dibuat dari ${slides.length} slide/bagian. Periksa soal, pilihan, dan semua kunci jawaban. Materi yang terbatas bisa menghasilkan soal berulang bertanda PERLU EDIT. Belum dipublikasikan.`;
       } catch (err) {
         statusEl.textContent = `Gagal membaca materi: ${err.message}`;
       } finally {
@@ -890,6 +913,27 @@
       p.active=active; p.updatedAt=Date.now(); saveLocal();
       window.pushAllToCloud(false);
     };
+    function getQuizEditData(p) {
+      const src=uploadDraft && uploadDraft.paketId===p.id ? uploadDraft.questions : p.questions;
+      return src.map((item,idx)=>{
+        const field=document.getElementById(`ed-q-${idx}`);
+        if(!field)return {...item};
+        const q=field.value;
+        const ans=document.getElementById(`ed-ans-${idx}`)?.value||'';
+        return item.type==='pg' ? {type:'pg',q,ans,options:[0,1,2,3].map(o=>document.getElementById(`ed-opt-${idx}-${o}`)?.value||'')} : {type:'essay',q,ans};
+      });
+    }
+    window.resizeQuizQuestions=function(){
+      const p=pakets.find(x=>x.id===document.getElementById('editor-paket-select').value);
+      if(!p)return;
+      if(results.some(r=>r.paketId===p.id))return alert('Paket sudah memiliki hasil. Buat paket baru untuk mengubah jumlah soal supaya hasil terdahulu tetap konsisten.');
+      const pg=Number(document.getElementById('quiz-count-pg').value), essay=Number(document.getElementById('quiz-count-essay').value);
+      if(!Number.isInteger(pg)||!Number.isInteger(essay)||pg<0||essay<0||pg+essay<1||pg+essay>50)return alert('Jumlah soal harus 1–50.');
+      const existing=getQuizEditData(p);
+      const oldPg=existing.filter(x=>x.type==='pg'),oldEssay=existing.filter(x=>x.type!=='pg');
+      const questions=[...Array.from({length:pg},(_,i)=>oldPg[i]||{type:'pg',q:'',options:['','','',''],ans:'A'}),...Array.from({length:essay},(_,i)=>oldEssay[i]||{type:'essay',q:'',ans:''})];
+      uploadDraft={paketId:p.id,questions}; window.loadPaketIntoEditor();
+    };
     window.loadPaketIntoEditor = function() {
       const id = document.getElementById('editor-paket-select')?.value;
       const p = pakets.find(item => item.id === id);
@@ -900,6 +944,8 @@
       if (!p) { container.innerHTML = ''; return; }
 
       const editingQuestions = uploadDraft && uploadDraft.paketId === id ? uploadDraft.questions : p.questions;
+      document.getElementById('quiz-count-pg').value=editingQuestions.filter(x=>x.type==='pg').length;
+      document.getElementById('quiz-count-essay').value=editingQuestions.filter(x=>x.type!=='pg').length;
       container.innerHTML = editingQuestions.map((item, idx) => {
         if (item.type === 'pg') {
           return `
@@ -950,7 +996,8 @@
         alert('Masih ada soal, jawaban atau pilihan yang kosong/bertanda PERLU EDIT, atau pilihan ganda yang sama. Perbaiki semuanya sebelum publikasi.');
         return;
       }
-      if (!confirm(`Publikasikan 20 soal pada paket "${p.title}" (${p.matkul})? Pastikan semua kunci sudah diperiksa.`)) return;
+      if(results.some(r=>r.paketId===id) && JSON.stringify(edited)!==JSON.stringify(p.questions))return alert('Soal sudah pernah dikerjakan. Untuk perubahan soal atau jumlah soal, buat paket baru agar penilaian tetap konsisten.');
+      if (!confirm(`Publikasikan ${edited.length} soal pada paket "${p.title}" (${p.matkul})? Pastikan semua kunci sudah diperiksa.`)) return;
       p.questions = edited;
       p.updatedAt = Date.now();
       uploadDraft = null;
@@ -959,7 +1006,7 @@
       document.getElementById('ppt-status').textContent = 'Soal sudah disimpan pada browser ini. Sinkronisasi Cloud akan dicoba; periksa Google Sheets untuk memastikan berhasil.';
       document.getElementById('ppt-status').classList.remove('hidden');
       window.pushAllToCloud(false);
-      alert('20 soal berhasil disimpan pada paket yang dipilih. Periksa penyimpanan di Cloud sebelum digunakan mahasiswa.');
+      alert(`${edited.length} soal berhasil disimpan pada paket yang dipilih. Periksa penyimpanan di Cloud sebelum digunakan mahasiswa.`);
     };
 
     window.deleteCurrentPaket = function() {
@@ -981,7 +1028,7 @@
       const filtered = results
         .filter(r => filterId === 'ALL' || r.paketId === filterId)
         .sort((a, b) => {
-          if (b.totalPoin !== a.totalPoin) return b.totalPoin - a.totalPoin;
+          if (b.skala100 !== a.skala100) return b.skala100 - a.skala100;
           return a.durationSec - b.durationSec;
         });
 
@@ -1000,8 +1047,8 @@
             <td class="p-3 font-bold text-slate-900">${escapeHtml(r.nama)}</td>
             <td class="p-3 font-mono text-xs">${escapeHtml(r.npm)}</td>
             <td class="p-3 text-xs">${escapeHtml(r.matkul)}</td>
-            <td class="p-3 text-center font-semibold">${r.totalBenar}/20</td>
-            <td class="p-3 text-center font-extrabold text-teal-800">${r.totalPoin.toLocaleString('id-ID')}</td>
+            <td class="p-3 text-center font-semibold">${r.totalBenar}/${r.totalSoal||20}</td>
+            <td class="p-3 text-center font-extrabold text-teal-800">${r.skala100}</td>
             <td class="p-3 text-center font-mono text-xs">${r.durationText}</td>
             <td class="p-3 text-center">
               <button type="button" onclick="window.deleteResult('${r.id}')" class="text-rose-600 hover:underline text-xs font-bold">Hapus</button>
@@ -1021,7 +1068,7 @@
       const filterId = document.getElementById('rank-filter-paket').value;
       const filtered = results
         .filter(r => filterId === 'ALL' || r.paketId === filterId)
-        .sort((a, b) => (b.totalPoin !== a.totalPoin ? b.totalPoin - a.totalPoin : a.durationSec - b.durationSec));
+        .sort((a, b) => (b.skala100 !== a.skala100 ? b.skala100 - a.skala100 : a.durationSec - b.durationSec));
 
       if (!filtered.length) return alert('Belum ada data nilai untuk diunduh.');
 
@@ -1034,6 +1081,7 @@
         'Benar PG': r.benarPg,
         'Benar Isian': r.benarEssay,
         'Total Benar': r.totalBenar,
+        'Jumlah Soal':r.totalSoal||20,
         'Total Poin': r.totalPoin,
         'Nilai Skala 100': r.skala100,
         'Waktu Pengerjaan': r.durationText,
@@ -1133,7 +1181,44 @@
       ['quiz','uts'].forEach(k => document.getElementById('mode-'+k).className = 'px-4 py-2 rounded-lg text-xs font-bold ' + (mode === k ? 'bg-teal-800 text-white':'bg-slate-100 text-slate-700'));
       if (mode === 'uts') refreshUtsSelects();
     };
-    function blankUtsQuestions(type='UTS') { return Array.from({length:5},()=>type==='Tugas'?{a:'',b:'',weightA:20,weightB:0}:{a:'',b:'',weightA:10,weightB:10}); }
+    function blankUtsQuestions(type='UTS',count=5) {
+      return Array.from({length:count},()=>type==='Tugas'?{a:'',b:'',weightA:100/count,weightB:0,useB:false}:{a:'',b:'',weightA:50/count,weightB:50/count,useB:true});
+    }
+    function utsParts(q,type){return type==='Tugas'||q.useB===false||(!q.b&&(!q.weightB))?['a']:['a','b'];}
+    function captureUtsEditor(p){
+      const source=utsDrafts[p.id]||p.questions;
+      return source.map((q,i)=>{
+        const result={...q};
+        const a=document.getElementById(`uts-q-${i}-a`);
+        if(!a)return result;
+        result.a=a.value;result.weightA=Number(document.getElementById(`uts-w-${i}-a`).value);
+        result.keyA=document.getElementById(`uts-key-${i}-a`).value;
+        result.rubricA=document.getElementById(`uts-rubric-${i}-a`).value;
+        if(p.type==='Tugas'){result.useB=false;result.b='';result.weightB=0;return result;}
+        result.useB=!!document.getElementById(`uts-use-b-${i}`)?.checked;
+        const b=document.getElementById(`uts-q-${i}-b`);
+        if(b){result.b=b.value;result.weightB=Number(document.getElementById(`uts-w-${i}-b`).value);result.keyB=document.getElementById(`uts-key-${i}-b`).value;result.rubricB=document.getElementById(`uts-rubric-${i}-b`).value;}
+        if(!result.useB){result.b='';result.weightB=0;result.keyB='';result.rubricB='';}
+        return result;
+      });
+    }
+    window.resizeUtsQuestions=function(){
+      const p=utsPackages.find(x=>x.id===document.getElementById('uts-edit-package').value);if(!p)return;
+      if(utsResults.some(r=>r.packageId===p.id))return alert('Paket memiliki jawaban masuk. Buat paket baru untuk mengubah jumlah soal.');
+      const count=Number(document.getElementById('uts-count').value);
+      if(!Number.isInteger(count)||count<1||count>30)return alert('Jumlah soal esai 1–30.');
+      const source=captureUtsEditor(p);
+      const drafts=blankUtsQuestions(p.type,count).map((q,i)=>source[i]||q);
+      if(count!==source.length){const w=100/count;drafts.forEach(q=>{q.weightA=utsParts(q,p.type).length===2?w/2:w;q.weightB=utsParts(q,p.type).length===2?w/2:0;});}
+      utsDrafts[p.id]=drafts;window.renderUtsEditor();
+    };
+    window.changeUtsPart=function(i){
+      const p=utsPackages.find(x=>x.id===document.getElementById('uts-edit-package').value);if(!p)return;
+      const q=captureUtsEditor(p);
+      if(!q[i].useB){q[i].weightB=0;q[i].b='';q[i].keyB='';q[i].rubricB='';}
+      else if(!q[i].weightB){q[i].weightB=q[i].weightA/2;q[i].weightA=q[i].weightA-q[i].weightB;}
+      utsDrafts[p.id]=q;window.renderUtsEditor();
+    };
     function refreshUtsSelects() {
       const editor = document.getElementById('uts-edit-package');
       const student = document.getElementById('uts-student-package');
@@ -1162,24 +1247,28 @@
     window.setUtsActive=function(active){
       const p=utsPackages.find(x=>x.id===document.getElementById('uts-edit-package').value);
       if(!p)return;
-      if(active && !p.published){document.getElementById('uts-active').checked=false;return alert('Simpan dan publikasikan 5 soal dahulu.');}
+      if(active && !p.published){document.getElementById('uts-active').checked=false;return alert('Simpan dan publikasikan soal dahulu.');}
       p.active=active;saveUtsStore();refreshUtsSelects();
     };
     window.renderUtsEditor = function() {
       const p=utsPackages.find(x=>x.id===document.getElementById('uts-edit-package').value);
       const div=document.getElementById('uts-editor');
-      const toggle=document.getElementById('uts-active'); if(toggle){toggle.checked=!!p && p.active !== false;toggle.disabled=!p;}
-      if(!p){div.innerHTML='<p class="text-sm text-slate-500">Buat atau pilih paket ujian dahulu.</p>'; window.renderUtsGrading(); return;}
+      const toggle=document.getElementById('uts-active');if(toggle){toggle.checked=!!p && p.active !== false;toggle.disabled=!p;}
+      if(!p){div.innerHTML='<p class="text-sm text-slate-500">Buat atau pilih paket ujian dahulu.</p>';window.renderUtsGrading();return;}
+      const currentQuestions=utsDrafts[p.id]||p.questions;
+      document.getElementById('uts-count').value=currentQuestions.length;
       const isTask=p.type==='Tugas';
-      const currentQuestions = utsDrafts[p.id] || p.questions;
-      div.innerHTML = `<p class="text-xs text-slate-500">${escapeHtml(p.type)} • ${escapeHtml(p.course)} • ${p.duration} menit • ${p.published?'Sudah dipublikasikan':'Belum dipublikasikan'} • ${p.active !== false?'Aktif':'Nonaktif'}. ${isTask?'5 soal esai, masing-masing 20 poin.':'Setiap soal punya bagian a dan b.'}</p>`+
-      currentQuestions.map((q,i)=>`<div class="p-4 rounded-xl border border-teal-100 bg-slate-50 space-y-3"><h4 class="font-bold text-teal-900">Soal ${i+1}</h4>
-      ${(isTask?['a']:['a','b']).map(k=>`<div class="grid sm:grid-cols-[1fr_110px] gap-2"><div><label class="text-xs font-bold">${isTask?'Pertanyaan':`Bagian ${k}`}</label><textarea id="uts-q-${i}-${k}" class="w-full border p-2 rounded-lg text-sm" rows="2" placeholder="Tulis soal ${i+1}${isTask?'':k}">${escapeHtml(q[k])}</textarea></div><div><label class="text-xs font-bold">Bobot poin</label><input id="uts-w-${i}-${k}" type="number" min="0" max="100" class="w-full border p-2 rounded-lg" value="${q[k==='a'?'weightA':'weightB']}"></div></div>`).join('')}</div>`).join('');
+      div.innerHTML=`<p class="text-xs text-slate-500">${escapeHtml(p.type)} • ${escapeHtml(p.course)} • ${currentQuestions.length} soal • ${p.duration} menit • ${p.published?'Sudah dipublikasikan':'Belum dipublikasikan'} • ${p.active!==false?'Aktif':'Nonaktif'}. Atur jumlah soal dan bagian b secara fleksibel.</p>`+
+      currentQuestions.map((q,i)=>{
+        const parts=utsParts(q,p.type);
+        return `<div class="p-4 rounded-xl border border-teal-100 bg-slate-50 space-y-3"><div class="flex flex-wrap justify-between items-center gap-2"><h4 class="font-bold text-teal-900">Soal ${i+1}</h4>${!isTask?`<label class="text-xs font-bold"><input type="checkbox" id="uts-use-b-${i}" ${parts.length===2?'checked':''} onchange="window.changeUtsPart(${i})"> Gunakan bagian b</label>`:''}</div>`+
+        parts.map(k=>`<div class="grid sm:grid-cols-[1fr_110px] gap-2"><div><label class="text-xs font-bold">${isTask?'Pertanyaan':`Bagian ${k}`}</label><textarea id="uts-q-${i}-${k}" class="w-full border p-2 rounded-lg text-sm" rows="2">${escapeHtml(q[k]||'')}</textarea></div><div><label class="text-xs font-bold">Bobot poin</label><input id="uts-w-${i}-${k}" type="number" min="0.01" max="100" step="0.01" class="w-full border p-2 rounded-lg" value="${q[k==='a'?'weightA':'weightB']}"></div></div><div class="grid md:grid-cols-2 gap-2"><div><label class="text-xs font-bold">Jawaban acuan dosen</label><textarea id="uts-key-${i}-${k}" class="w-full border p-2 rounded-lg text-sm" rows="3">${escapeHtml(q[k==='a'?'keyA':'keyB']||'')}</textarea></div><div><label class="text-xs font-bold">Rubrik / indikator (satu per baris)</label><textarea id="uts-rubric-${i}-${k}" class="w-full border p-2 rounded-lg text-sm" rows="3">${escapeHtml(q[k==='a'?'rubricA':'rubricB']||'')}</textarea></div></div>`).join('')+'</div>';
+      }).join('');
       window.renderUtsGrading();
     };
     // Membuat draf berdasarkan isi nyata slide; tidak mengklaim mengerti isi melalui AI.
     // Pertanyaan adalah prompt esai berbasis kutipan slide, sehingga wajib disunting dosen.
-    function buildUtsDraftFromSlides(slides, type) {
+    function buildUtsDraftFromSlides(slides, type, count=5) {
       const clean = x => String(x || '').replace(/\s+/g, ' ').trim();
       const entries = [];
       slides.forEach((slide, idx) => {
@@ -1191,8 +1280,8 @@
           }
         });
       });
-      if (entries.length < 5) throw new Error('Materi terbaca kurang dari 5 pokok teks. Gunakan PPTX berisi teks yang dapat diseleksi, atau TXT yang cukup rinci.');
-      const needed = type === 'Tugas' ? 5 : 10;
+      if (entries.length < count) throw new Error(`Materi terbaca kurang dari ${count} pokok teks. Gunakan PPTX berisi teks yang dapat diseleksi atau TXT lebih rinci.`);
+      const needed = type === 'Tugas' ? count : count*2;
       // Distribusikan sumber ke seluruh file/slide, bukan mengambil bagian awal saja.
       const chosen = Array.from({length:needed}, (_,i) => {
         const index = Math.min(entries.length - 1, Math.floor(((i+0.5) * entries.length)/needed));
@@ -1202,9 +1291,9 @@
         const quote = entry.text.slice(0,190);
         return `[DRAF - EDIT DOSEN] ${kind} berdasarkan pokok materi pada slide ${entry.slide} (${entry.title.slice(0,65)}): "${quote}". Jelaskan dengan konsep dan contoh yang relevan.`;
       };
-      return Array.from({length:5}, (_,i) => type === 'Tugas'
-        ? {a:prompt(chosen[i], 'Uraikan dan analisis'),b:'',weightA:20,weightB:0}
-        : {a:prompt(chosen[i*2], 'Jelaskan konsep utama'),b:prompt(chosen[i*2+1], 'Analisis penerapan'),weightA:10,weightB:10});
+      return Array.from({length:count}, (_,i) => type === 'Tugas'
+        ? {a:prompt(chosen[i], 'Uraikan dan analisis'),b:'',weightA:100/count,weightB:0,useB:false}
+        : {a:prompt(chosen[i*2], 'Jelaskan konsep utama'),b:prompt(chosen[i*2+1], 'Analisis penerapan'),weightA:50/count,weightB:50/count,useB:true});
     }
 
     window.uploadUtsPPT = async function(event) {
@@ -1217,7 +1306,7 @@
         status.textContent='Paket sudah memiliki jawaban masuk. Demi konsistensi penilaian, buat paket baru untuk soal hasil upload.';
         event.target.value='';return;
       }
-      if (!confirm(`Susun draf 5 soal ${p.type} dari ${files.length} file ke paket "${p.title}"? Judul dan mata kuliah tidak berubah. Draf belum dipublikasikan sampai tombol Simpan ditekan.`)) {
+      if (!confirm(`Susun draf ${Number(document.getElementById('uts-count').value)} soal ${p.type} dari ${files.length} file ke paket "${p.title}"? Judul dan mata kuliah tidak berubah. Draf belum dipublikasikan sampai tombol Simpan ditekan.`)) {
         event.target.value='';return;
       }
       try {
@@ -1237,10 +1326,12 @@
             for (const name of slideNames) slides.push(getSlideLines(await zip.files[name].async('text')));
           } else throw new Error('Format tidak didukung: '+file.name);
         }
-        const draft=buildUtsDraftFromSlides(slides,p.type);
-        utsDrafts[p.id]=draft;
+        const count=Number(document.getElementById('uts-count').value);
+        if(!Number.isInteger(count)||count<1||count>30)throw new Error('Jumlah soal 1–30.');
+        const draft=buildUtsDraftFromSlides(slides,p.type,count);
+        utsDrafts[p.id]=draft.map((q,i)=>({...q,keyA:p.questions[i]?.keyA||'',keyB:p.questions[i]?.keyB||'',rubricA:p.questions[i]?.rubricA||'',rubricB:p.questions[i]?.rubricB||''}));
         window.renderUtsEditor();
-        status.textContent=`Draf 5 soal ${p.type} dari ${files.length} file (${slides.length} slide/bagian) telah ditempatkan di editor. EDIT semua pertanyaan agar sesuai kompetensi materi, kemudian klik Simpan & Publikasikan. Paket tetap ${p.active?'Aktif':'Nonaktif'}.`;
+        status.textContent=`Draf ${draft.length} soal ${p.type} dari ${files.length} file (${slides.length} slide/bagian) telah ditempatkan di editor. EDIT semua pertanyaan agar sesuai kompetensi materi, kemudian klik Simpan & Publikasikan. Paket tetap ${p.active?'Aktif':'Nonaktif'}.`;
       } catch(err) {
         status.textContent='Upload gagal: '+err.message;
       } finally { event.target.value=''; }
@@ -1248,17 +1339,22 @@
 
     window.saveUtsQuestions=function(){
       const p=utsPackages.find(x=>x.id===document.getElementById('uts-edit-package').value);
-      if(!p) return alert('Pilih paket dahulu.');
-      const qs=[]; let total=0;
-      for(let i=0;i<5;i++) {
-        const isTask=p.type==='Tugas';
-        const q={a:document.getElementById(`uts-q-${i}-a`).value.trim(),b:isTask?'':document.getElementById(`uts-q-${i}-b`).value.trim(),weightA:Number(document.getElementById(`uts-w-${i}-a`).value),weightB:isTask?0:Number(document.getElementById(`uts-w-${i}-b`).value)};
-        if(!q.a || (!isTask && !q.b) || !Number.isInteger(q.weightA) || !Number.isInteger(q.weightB) || q.weightA<0 || q.weightB<0) return alert(`Periksa soal ${i+1} dan bobotnya.`);
-        qs.push(q); total+=q.weightA+q.weightB;
+      if(!p)return alert('Pilih paket dahulu.');
+      const qs=captureUtsEditor(p);
+      if(!qs.length)return alert('Paket belum memiliki soal.');
+      if(utsResults.some(r=>r.packageId===p.id)&&JSON.stringify(qs)!==JSON.stringify(p.questions))return alert('Paket sudah memiliki jawaban. Buat paket baru untuk mengubah soal/bobot.');
+      let total=0;
+      for(let i=0;i<qs.length;i++){
+        const q=qs[i];
+        for(const k of utsParts(q,p.type)){
+          const weight=Number(q[k==='a'?'weightA':'weightB']);
+          const key=q[k==='a'?'keyA':'keyB']; const rubric=q[k==='a'?'rubricA':'rubricB'];
+          if(!q[k]?.trim()||!Number.isFinite(weight)||weight<=0||!String(key||'').trim()||!String(rubric||'').trim())return alert(`Lengkapi pertanyaan, bobot positif, jawaban acuan dan rubrik soal ${i+1}${k}.`);
+          total+=weight;
+        }
       }
-      if(total!==100) return alert('Total seluruh bobot 5 soal (a+b) harus tepat 100 poin. Saat ini: '+total);
-      if(p.published && utsResults.some(r=>r.packageId===p.id) && !confirm('Sudah ada jawaban masuk. Mengubah soal/bobot dapat mengganggu penilaian. Tetap lanjutkan?')) return;
-      p.questions=qs; p.published=true; delete utsDrafts[p.id]; saveUtsStore(); refreshUtsSelects(); alert('5 soal dan bobot berhasil disimpan dan diterbitkan dalam mode simulasi lokal.');
+      if(Math.abs(total-100)>0.001)return alert(`Total bobot harus 100 poin; saat ini ${total.toFixed(2)}. Perbaiki bobot aktif.`);
+      p.questions=qs;p.published=true;delete utsDrafts[p.id];saveUtsStore();refreshUtsSelects();alert(`${qs.length} soal berhasil diterbitkan dalam mode simulasi lokal.`);
     };
     window.removeUtsPackage=function(){
       const id=document.getElementById('uts-edit-package').value;
@@ -1272,12 +1368,12 @@
       const p=utsPackages.find(x=>x.id===document.getElementById('uts-student-package').value && x.published && x.active !== false);
       const name=document.getElementById('uts-student-name').value.trim();
       const npm=document.getElementById('uts-student-npm').value.trim();
-      if(!p || !name || !npm) return alert('Lengkapi identitas dan pilih paket ujian.');
+      if(!p || !name || !npm || !p.questions?.length) return alert('Lengkapi identitas dan pilih paket ujian yang memiliki soal.');
       if(utsResults.some(r=>r.packageId===p.id && r.npm.toLowerCase()===npm.toLowerCase()))return alert('NPM ini sudah mengumpulkan jawaban untuk paket tersebut pada browser ini.');
       activeUts={p,name,npm};utsStarted=Date.now();utsDeadline=utsStarted+p.duration*60000;
       document.getElementById('uts-exam-title').textContent=`${p.type} • ${p.title}`;
       document.getElementById('uts-exam-identity').textContent=`${name} • ${npm} • ${p.course}`;
-      document.getElementById('uts-student-questions').innerHTML=p.questions.map((q,i)=>`<div class="bg-white border border-teal-100 p-5 rounded-xl space-y-3"><h3 class="font-bold text-teal-900">Soal ${i+1} / 5</h3>${(p.type==='Tugas'?['a']:['a','b']).map(k=>`<label class="block text-sm font-medium">${p.type==='Tugas'?'':k+'. '}${escapeHtml(q[k])} <span class="text-slate-500">(${q[k==='a'?'weightA':'weightB']} poin)</span></label><textarea id="uts-answer-${i}-${k}" rows="5" class="w-full border rounded-lg p-3 text-sm" placeholder="Tulis jawaban bagian ${k}..."></textarea>`).join('')}</div>`).join('');
+      document.getElementById('uts-student-questions').innerHTML=p.questions.map((q,i)=>`<div class="bg-white border border-teal-100 p-5 rounded-xl space-y-3"><h3 class="font-bold text-teal-900">Soal ${i+1} / ${p.questions.length}</h3>${utsParts(q,p.type).map(k=>`<label class="block text-sm font-medium">${p.type==='Tugas'?'':k+'. '}${escapeHtml(q[k])} <span class="text-slate-500">(${q[k==='a'?'weightA':'weightB']} poin)</span></label><textarea id="uts-answer-${i}-${k}" rows="5" class="w-full border rounded-lg p-3 text-sm" placeholder="Tulis jawaban... "></textarea>`).join('')}</div>`).join('');
       document.getElementById('uts-student-intro').classList.add('hidden'); document.getElementById('uts-student-exam').classList.remove('hidden');
       const tick=()=>{
         const remaining=Math.max(0,Math.ceil((utsDeadline-Date.now())/1000));
@@ -1289,35 +1385,80 @@
     window.submitUts=function(event,automatic=false){
       if(event)event.preventDefault();
       if(!activeUts)return;
-      if(!automatic && !confirm('Yakin ingin mengumpulkan jawaban UTS/UAS?'))return;
+      if(!automatic && !confirm('Yakin ingin mengumpulkan jawaban ujian/tugas?'))return;
       const {p,name,npm}=activeUts;
-      const answers=p.questions.map((q,i)=>({a:document.getElementById(`uts-answer-${i}-a`).value,b:p.type==='Tugas'?'':document.getElementById(`uts-answer-${i}-b`).value}));
+      const answers=p.questions.map((q,i)=>({a:document.getElementById(`uts-answer-${i}-a`)?.value||'',b:utsParts(q,p.type).includes('b')?(document.getElementById(`uts-answer-${i}-b`)?.value||''):''}));
       clearInterval(utsTimer);
-      const record={id:'utsres-'+Date.now(),packageId:p.id,packageTitle:p.title,course:p.course,type:p.type,name,npm,answers,questionSnapshot:JSON.parse(JSON.stringify(p.questions)),scores:Array.from({length:5},()=>({a:0,b:0})),graded:false,submittedAt:new Date().toISOString(),seconds:Math.round((Date.now()-utsStarted)/1000)};
+      const record={id:'utsres-'+Date.now(),packageId:p.id,packageTitle:p.title,course:p.course,type:p.type,name,npm,answers,questionSnapshot:JSON.parse(JSON.stringify(p.questions)),scores:Array.from({length:p.questions.length},()=>({a:0,b:0})),graded:false,submittedAt:new Date().toISOString(),seconds:Math.round((Date.now()-utsStarted)/1000)};
       utsResults.push(record);saveUtsStore();activeUts=null;
       document.getElementById('uts-student-exam').classList.add('hidden');document.getElementById('uts-student-done').classList.remove('hidden');window.renderUtsGrading();
       if(automatic)alert('Waktu habis. Jawaban tersimpan otomatis di browser ini.');
+    };
+    // Rekomendasi transparan berbasis kecocokan kata rubrik; BUKAN AI dan bukan nilai final.
+    function recommendRubric(answer, rubric, key, maximum) {
+      const normalize = v => String(v||'').toLowerCase().normalize('NFKD').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+      const stop = new Set(['yang','dan','atau','dengan','dalam','untuk','dari','pada','adalah','merupakan','sebagai','serta','yaitu','ini','itu','secara','oleh','dapat','akan','harus','agar','sebuah','suatu']);
+      const toks = str => normalize(str).split(' ').filter(w=>w.length>3 && !stop.has(w));
+      const answerWords = new Set(toks(answer));
+      const indicators=String(rubric||'').split(/\n+/).map(x=>x.trim()).filter(Boolean);
+      if(!String(answer||'').trim())return {score:0,plus:[],minus:['Tidak ada jawaban.'],notice:'Jawaban kosong.'};
+      const criteria=indicators.length?indicators:[String(key||'')];
+      if(!criteria.some(Boolean))return {score:null,plus:[],minus:['Rubrik belum ada.'],notice:'Masukkan rubrik terlebih dahulu.'};
+      const plus=[],minus=[];
+      let ratio=0;
+      criteria.forEach(item=>{
+        const words=[...new Set(toks(item))];
+        const hit=words.filter(w=>answerWords.has(w));
+        const fraction=words.length?hit.length/words.length:0;
+        ratio+=fraction;
+        if(fraction>=0.5)plus.push('Terindikasi: '+item);
+        else minus.push('Periksa kembali indikator: '+item);
+      });
+      ratio=ratio/criteria.length;
+      return {score:Math.round(maximum*ratio*2)/2,plus,minus,notice:'Indikatif saja: pencocokan kata dapat salah pada sinonim, penalaran, contoh, atau negasi.'};
+    }
+    function gradeTotal(r){return (r.scores||[]).reduce((n,x)=>n+(Number(x.a)||0)+(Number(x.b)||0),0);}
+    window.renderUtsRank=function(){
+      const box=document.getElementById('uts-rank');if(!box)return;
+      const id=document.getElementById('uts-edit-package')?.value;
+      const entries=utsResults.filter(r=>r.packageId===id).map(r=>({...r,total:gradeTotal(r)}));
+      const approved=entries.filter(r=>r.graded).sort((a,b)=>b.total-a.total || a.name.localeCompare(b.name));
+      const pending=entries.filter(r=>!r.graded);
+      if(!entries.length){box.innerHTML='<p class="text-xs text-slate-500">Belum ada hasil.</p>';return;}
+      let last=null,rank=0;
+      const body=approved.map((r,i)=>{if(last!==r.total)rank=i+1;last=r.total;return `<tr class="border-b"><td class="p-2">${rank}</td><td class="p-2">${escapeHtml(r.name)}</td><td class="p-2">${escapeHtml(r.npm)}</td><td class="p-2 font-bold">${r.total.toFixed(1)}</td><td class="p-2">Disetujui</td></tr>`;}).join('');
+      box.innerHTML=`<table class="w-full text-sm"><thead><tr class="bg-teal-900 text-white"><th class="p-2 text-left">Rank</th><th class="p-2 text-left">Nama</th><th class="p-2 text-left">NPM</th><th class="p-2 text-left">Nilai /100</th><th class="p-2 text-left">Status</th></tr></thead><tbody>${body}${pending.map(r=>`<tr class="border-b"><td class="p-2">—</td><td class="p-2">${escapeHtml(r.name)}</td><td class="p-2">${escapeHtml(r.npm)}</td><td class="p-2">—</td><td class="p-2 text-amber-800">Menunggu validasi</td></tr>`).join('')}</tbody></table>`;
     };
     window.renderUtsGrading=function(){
       const el=document.getElementById('uts-grading');if(!el)return;
       const packageId=document.getElementById('uts-edit-package').value;
       const rows=utsResults.filter(r=>r.packageId===packageId);
+      window.renderUtsRank();
       if(!rows.length){el.innerHTML='<p class="text-sm text-slate-500">Belum ada jawaban tersimpan pada browser ini.</p>';return;}
-      el.innerHTML=rows.map(r=>`<div class="border rounded-xl p-4 space-y-3"><div class="flex items-center justify-between gap-3"><b class="text-sm">${escapeHtml(r.name)} • ${escapeHtml(r.npm)}</b><span class="text-xs ${r.graded?'text-emerald-700':'text-amber-700'}">${r.graded?'Sudah dinilai':'Belum dinilai'}</span></div><p class="text-xs text-slate-500">Dikumpulkan ${new Date(r.submittedAt).toLocaleString('id-ID')}</p>${r.answers.map((ans,i)=>`<div class="border-t pt-3 space-y-2"><strong class="text-sm">Soal ${i+1}</strong>${(r.type==='Tugas'?['a']:['a','b']).map(k=>`<div><p class="text-xs font-semibold">${r.type==='Tugas'?'':k+'. '}${escapeHtml(r.questionSnapshot[i][k])}</p><p class="text-sm p-2 rounded bg-slate-50 whitespace-pre-wrap">${escapeHtml(ans[k]||'(kosong)')}</p><label class="text-xs">Nilai ${k} (maks ${r.questionSnapshot[i][k==='a'?'weightA':'weightB']})</label><input id="uts-grade-${r.id}-${i}-${k}" type="number" min="0" max="${r.questionSnapshot[i][k==='a'?'weightA':'weightB']}" step="0.5" value="${r.scores[i][k]}" class="w-24 border rounded p-1 text-sm"></div>`).join('')}</div>`).join('')}<button type="button" onclick="window.saveUtsGrade('${r.id}')" class="p-2 rounded-lg bg-teal-800 text-white font-bold text-sm">Simpan Penilaian</button></div>`).join('');
+      el.innerHTML=rows.map(r=>`<div class="border rounded-xl p-4 space-y-3"><div class="flex items-center justify-between gap-3"><b class="text-sm">${escapeHtml(r.name)} • ${escapeHtml(r.npm)}</b><span class="text-xs ${r.graded?'text-emerald-700':'text-amber-700'}">${r.graded?'Nilai final disetujui':'Menunggu validasi dosen'}</span></div><p class="text-xs text-slate-500">Dikumpulkan ${new Date(r.submittedAt).toLocaleString('id-ID')}; revisi nilai: ${(r.gradeHistory||[]).length}</p>${r.answers.map((ans,i)=>`<div class="border-t pt-3 space-y-2"><strong class="text-sm">Soal ${i+1}</strong>${utsParts(r.questionSnapshot[i],r.type).map(k=>{const q=r.questionSnapshot[i];const max=Number(q[k==='a'?'weightA':'weightB']);const key=q[k==='a'?'keyA':'keyB']||'';const rubric=q[k==='a'?'rubricA':'rubricB']||'';const rec=recommendRubric(ans[k],rubric,key,max);const field=`${r.id}-${i}-${k}`;const old=r.recommendations?.[i]?.[k];return `<div class="rounded-lg border p-3 space-y-2"><p class="text-xs font-semibold">${r.type==='Tugas'?'':k+'. '}${escapeHtml(q[k])}</p><p class="text-sm p-2 rounded bg-slate-50 whitespace-pre-wrap">${escapeHtml(ans[k]||'(kosong)')}</p><details class="text-xs"><summary class="cursor-pointer font-semibold">Lihat jawaban acuan dan rubrik dosen</summary><p class="mt-2"><b>Jawaban acuan:</b> ${escapeHtml(key)}</p><p class="whitespace-pre-wrap mt-1"><b>Rubrik:</b> ${escapeHtml(rubric)}</p></details><div class="bg-amber-50 border border-amber-200 p-2 rounded-lg text-xs space-y-1"><b>Rekomendasi berbasis rubrik: ${rec.score===null?'—':rec.score} / ${max}</b><p class="text-slate-600">${escapeHtml(rec.notice)}</p><p><b>Indikator yang mungkin terjawab:</b> ${escapeHtml(rec.plus.join('; ')||'Belum terdeteksi')}</p><p><b>Perlu diperiksa:</b> ${escapeHtml(rec.minus.join('; ')||'Tidak ada indikator yang terlewat menurut pencocokan kata')}</p></div><div class="grid sm:grid-cols-[145px_1fr] gap-2"><div><label class="text-xs font-bold">Nilai dosen (maks ${max})</label><input id="uts-grade-${field}" type="number" min="0" max="${max}" step="0.5" value="${r.graded?r.scores[i][k]:(old?.score??rec.score??0)}" class="w-full border rounded p-2 text-sm"></div><div><label class="text-xs font-bold">Catatan kelebihan, kekurangan & alasan dosen</label><textarea id="uts-note-${field}" rows="3" class="w-full border rounded p-2 text-sm" placeholder="Dosen menilai substansi, bukan hanya kata kunci">${escapeHtml(r.notes?.[i]?.[k] || '')}</textarea></div></div></div>`;}).join('')}</div>`).join('')}<div class="flex flex-wrap gap-2"><button type="button" onclick="window.saveUtsGrade('${r.id}')" class="p-2 rounded-lg bg-teal-800 text-white font-bold text-sm">Setujui / Revisi Nilai Final</button><button type="button" onclick="window.reviewUtsRubric('${r.id}')" class="p-2 rounded-lg border text-sm font-bold">Hitung Ulang Rekomendasi</button></div></div>`).join('');
+    };
+    window.reviewUtsRubric=function(id){
+      const r=utsResults.find(x=>x.id===id);if(!r)return;
+      r.recommendations=r.answers.map((ans,i)=>({a:recommendRubric(ans.a,r.questionSnapshot[i].rubricA,r.questionSnapshot[i].keyA,r.questionSnapshot[i].weightA),b:utsParts(r.questionSnapshot[i],r.type).includes('b')?recommendRubric(ans.b,r.questionSnapshot[i].rubricB,r.questionSnapshot[i].keyB,r.questionSnapshot[i].weightB):null}));
+      saveUtsStore();window.renderUtsGrading();alert('Rekomendasi indikator dihitung ulang. Ini bukan penilaian AI generatif; periksa substansi jawaban.');
     };
     window.saveUtsGrade=function(id){
       const r=utsResults.find(x=>x.id===id);if(!r)return;
-      const next=[];
-      for(let i=0;i<5;i++){
-        let scores={};
-        for(const k of (r.type==='Tugas'?['a']:['a','b'])){
-          const val=Number(document.getElementById(`uts-grade-${r.id}-${i}-${k}`).value);
-          const max=r.questionSnapshot[i][k==='a'?'weightA':'weightB'];
-          if(!Number.isFinite(val)||val<0||val>max)return alert(`Nilai soal ${i+1}${k} harus 0–${max}.`);
-          scores[k]=val;
-        } if(r.type==='Tugas')scores.b=0; next.push(scores);
+      const next=[],notes=[];
+      for(let i=0;i<r.questionSnapshot.length;i++){
+        const scores={a:0,b:0},note={a:'',b:''};
+        for(const k of utsParts(r.questionSnapshot[i],r.type)){
+          const raw=document.getElementById(`uts-grade-${r.id}-${i}-${k}`).value;
+          const val=Number(raw); const max=Number(r.questionSnapshot[i][k==='a'?'weightA':'weightB']);
+          if(raw.trim()===''||!Number.isFinite(val)||val<0||val>max)return alert(`Nilai soal ${i+1}${k} harus 0–${max}.`);
+          scores[k]=val;note[k]=document.getElementById(`uts-note-${r.id}-${i}-${k}`).value.trim();
+        }
+        next.push(scores);notes.push(note);
       }
-      r.scores=next;r.graded=true;r.gradedAt=new Date().toISOString();saveUtsStore();window.renderUtsGrading();alert('Nilai disimpan lokal.');
+      if(!confirm(`Tetapkan nilai akhir ${next.reduce((n,x)=>n+x.a+x.b,0)} dari 100 untuk ${r.name}?`))return;
+      r.gradeHistory=r.gradeHistory||[];
+      r.gradeHistory.push({at:new Date().toISOString(),oldScores:JSON.parse(JSON.stringify(r.scores||[])),newScores:JSON.parse(JSON.stringify(next)),oldNotes:r.notes||[],newNotes:notes,action:r.graded?'revisi dosen':'validasi dosen'});
+      r.scores=next;r.notes=notes;r.graded=true;r.gradedAt=new Date().toISOString();saveUtsStore();window.renderUtsGrading();alert('Nilai final disetujui dosen dan tersimpan di browser ini.');
     };
     window.exportUtsGrades=function(){
       const id=document.getElementById('uts-edit-package').value;
@@ -1325,9 +1466,18 @@
       if(!rows.length)return alert('Belum ada hasil ujian untuk diekspor.');
       if(typeof XLSX==='undefined')return alert('Library Excel tidak tersedia.');
       const data=rows.map(r=>{
-        const row={'Nama':r.name,'NPM':r.npm,'Paket':r.packageTitle,'Mata Kuliah':r.course,'Status':r.graded?'Dinilai':'Belum dinilai','Waktu Submit':r.submittedAt};
-        r.answers.forEach((a,i)=>{row[`Jawaban ${i+1}${r.type==='Tugas'?'':'a'}`]=a.a;row[`Nilai ${i+1}${r.type==='Tugas'?'':'a'}`]=r.graded?r.scores[i].a:'';if(r.type!=='Tugas'){row[`Jawaban ${i+1}b`]=a.b;row[`Nilai ${i+1}b`]=r.graded?r.scores[i].b:'';}});
-        row['Total (100)']=r.graded?r.scores.reduce((n,x)=>n+x.a+x.b,0):'';
+        const row={'Nama':r.name,'NPM':r.npm,'Paket':r.packageTitle,'Mata Kuliah':r.course,'Jenis':r.type,'Jumlah Soal':r.questionSnapshot.length,'Status':r.graded?'Disetujui Dosen':'Menunggu Validasi','Waktu Submit':r.submittedAt,'Jumlah Revisi':(r.gradeHistory||[]).length};
+        r.answers.forEach((a,i)=>{
+          const q=r.questionSnapshot[i];
+          for(const k of utsParts(q,r.type)){
+            const suffix=r.type==='Tugas'?'':k;
+            row[`Pertanyaan ${i+1}${suffix}`]=q[k];
+            row[`Jawaban ${i+1}${suffix}`]=a[k];
+            row[`Nilai ${i+1}${suffix}`]=r.graded?r.scores[i][k]:'';
+            row[`Catatan ${i+1}${suffix}`]=r.notes?.[i]?.[k]||'';
+          }
+        });
+        row['Total (100)']=r.graded?gradeTotal(r):'';
         return row;
       });
       const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'Nilai_UTS_UAS');
