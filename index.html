@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id"> 
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -202,7 +202,7 @@
         <form onsubmit="window.loginDosen(event)" class="space-y-4">
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">Password Dosen</label>
-            <input type="password" id="dosen-pass-input" required value="dosen123" placeholder="Default: dosen123" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-teal-600" />
+            <input type="password" id="dosen-pass-input" required autocomplete="current-password" placeholder="Password dosen" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-teal-600" />
             <p class="text-[11px] text-slate-400 mt-1">Password awal default: <b>dosen123</b> (dapat diubah di menu pengaturan dosen).</p>
           </div>
           <button type="submit" class="w-full py-3 rounded-xl unipi-gradient text-white font-bold text-sm shadow hover:opacity-95 transition">
@@ -1568,6 +1568,52 @@
   wrap('deleteResult','delete_quiz_result',(_,id)=>results.some(x=>x.id===id)?null:{id});
   wrap('saveUtsGrade','approve_exam',(before,id,args)=>{const old=before.utsResults.find(r=>r.id===args[0]),now=utsResults.find(r=>r.id===args[0]);return old&&now&&(JSON.stringify(old.scores)!==JSON.stringify(now.scores)||JSON.stringify(old.notes)!==JSON.stringify(now.notes)||old.graded!==now.graded)?{data:{id:now.id,scores:now.scores,notes:now.notes}}:null;});
 
+  // Check the central database before displaying questions; the server also
+  // enforces the one-submission rule atomically at submit time.
+  function normalizedNpmClient(value){
+    return String(value||'').normalize('NFKC').trim().toUpperCase().replace(/[\s-]+/g,'');
+  }
+  let checkingEntry=false;
+  const originalStartQuiz=window.startQuiz;
+  window.startQuiz=async function(e){
+    if(e)e.preventDefault();
+    if(checkingEntry)return;
+    if(!serverReady)return alert('Database belum terhubung. Kuis tidak dapat dimulai.');
+    const paketId=document.getElementById('mhs-paket-select').value;
+    const nama=document.getElementById('mhs-nama').value.trim();
+    const input=document.getElementById('mhs-npm');
+    const npm=normalizedNpmClient(input.value);
+    if(!paketId||!nama)return alert('Pilih paket dan isi nama terlebih dahulu.');
+    if(!/^[A-Z0-9]{5,30}$/.test(npm))return alert('Isi NPM valid (5–30 angka atau huruf).');
+    checkingEntry=true;
+    try{
+      const x=await call('check_attempt',{data:{kind:'quiz',paketId,npm}});
+      if(x.alreadySubmitted){alert('NPM ini sudah mengumpulkan kuis untuk paket tersebut. Anda tidak dapat mengerjakannya dua kali. Hubungi dosen jika ada kekeliruan.');return;}
+      input.value=npm;
+      originalStartQuiz.call(this,e);
+    }catch(err){alert('Tidak dapat memeriksa status NPM: '+err.message+'; kuis belum dimulai.');}
+    finally{checkingEntry=false;}
+  };
+  const originalStartUts=window.startUts;
+  window.startUts=async function(e){
+    if(e)e.preventDefault();
+    if(checkingEntry)return;
+    if(!serverReady)return alert('Database belum terhubung. Ujian tidak dapat dimulai.');
+    const paketId=document.getElementById('uts-student-package').value;
+    const nama=document.getElementById('uts-student-name').value.trim();
+    const input=document.getElementById('uts-student-npm');
+    const npm=normalizedNpmClient(input.value);
+    if(!paketId||!nama)return alert('Pilih paket dan isi nama terlebih dahulu.');
+    if(!/^[A-Z0-9]{5,30}$/.test(npm))return alert('Isi NPM valid (5–30 angka atau huruf).');
+    checkingEntry=true;
+    try{
+      const x=await call('check_attempt',{data:{kind:'exam',paketId,npm}});
+      if(x.alreadySubmitted){alert('NPM ini sudah mengumpulkan untuk paket UTS/UAS/Tugas tersebut. Anda tidak dapat mengerjakannya dua kali.');return;}
+      input.value=npm;
+      originalStartUts.call(this,e);
+    }catch(err){alert('Tidak dapat memeriksa status NPM: '+err.message+'; ujian belum dimulai.');}
+    finally{checkingEntry=false;}
+  };
   // Browser must NEVER calculate scores: answer keys are server-only.
   window.submitQuiz=async function(e){
     if(e)e.preventDefault();if(sending||!activeQuizPaket)return;
@@ -1580,9 +1626,21 @@
       clearInterval(timerInterval);document.getElementById('mhs-quiz-area').classList.add('hidden');document.getElementById('mhs-result-area').classList.remove('hidden');
       document.getElementById('res-nama').textContent=document.getElementById('mhs-nama').value.trim();
       document.getElementById('res-info').textContent='Jawaban telah tercatat pada server • No. '+out.receipt;
-      ['res-poin','res-benar','res-skala100','res-pg','res-essay'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='Menunggu';});
-      document.getElementById('res-waktu').textContent=formatSeconds(elapsed);
-      alert('Jawaban berhasil diterima server. Nilai akhir dapat diperiksa oleh dosen.');
+      // Nilai dihitung di Google Apps Script dan dikirim hanya untuk peserta yang baru submit.
+      // Jangan menghitung nilai/kunci jawaban di browser mahasiswa.
+      const score=out.result;
+      if(score && Number.isFinite(Number(score.skala100)) && Number.isFinite(Number(score.totalBenar))){
+        document.getElementById('res-poin').textContent=String(score.totalPoin ?? score.skala100);
+        document.getElementById('res-benar').textContent=String(score.totalBenar)+' dari '+String(score.totalSoal)+' Soal';
+        document.getElementById('res-skala100').textContent=String(score.skala100);
+        document.getElementById('res-pg').textContent=String(score.benarPg ?? 0);
+        document.getElementById('res-essay').textContent=String(score.benarEssay ?? 0);
+      }else{
+        // Submission sudah tersimpan: jangan menyuruh peserta submit ulang.
+        ['res-poin','res-benar','res-skala100','res-pg','res-essay'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='Belum tersedia';});
+        document.getElementById('res-info').textContent+=' • Nilai belum diterima; minta dosen memeriksa hasil.';
+      }
+      document.getElementById('res-waktu').textContent=score?.durationText || formatSeconds(elapsed);
     }catch(ex){alert('GAGAL menyimpan jawaban ke server: '+ex.message+' — jawaban tetap ada di halaman, silakan coba lagi.');}
     finally{sending=false;}
   };
