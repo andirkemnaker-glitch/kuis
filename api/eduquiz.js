@@ -1,5 +1,5 @@
 // Vercel Node.js Serverless API. Keep all four secrets in Vercel Environment Variables.
-const crypto=require('node:crypto');
+const crypto=require('node:crypto'); 
 const actionsAdmin=new Set(['admin_snapshot','save_quiz_package','save_exam_package','approve_exam','delete_quiz_package','delete_exam_package','delete_quiz_result','delete_exam_result','quiz_review_queue','review_quiz_answer']);
 const actionsStudent=new Set(['submit_quiz','submit_exam','check_attempt']);
 function json(res,status,obj){res.status(status).setHeader('Cache-Control','no-store').json(obj);}
